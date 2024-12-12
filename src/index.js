@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import dom from 'react-dom/client';
+import "./index.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     fetchMovies();
@@ -15,7 +18,7 @@ function App() {
     try {
       setLoading(true);
       const response = await axios.get('http://www.omdbapi.com/', {
-        params: { s: searchTerm, apikey: 'YOUR_API_KEY_HERE' }
+        params: { s: searchTerm, apikey: '66bce79b' }
       });
       setMovies(response.data.Search);
     } catch (error) {
@@ -63,4 +66,5 @@ function MovieCard({ movie }) {
   );
 }
 
-export default App;
+const root = dom.createRoot(document.getElementById("root"));
+root.render(<><App/></>)
